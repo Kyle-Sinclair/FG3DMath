@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "DrawDebugHelpers.h"
-#include "GameFramework/Actor.h"
 #include "DrawShapeUtility.generated.h"
 
 /**
@@ -164,13 +163,12 @@ public:
 
 	UFUNCTION(BlueprintCallable,  Category = "Draw Shape")
 	static void Plane(
-		const AActor* CallingActor,	
+		const UWorld* WorldContext,	
 		const FVector& Location,
 		const FVector& Normal,
 		const FQuat& Quat,
 		const FColor& Color)
 	{
-		UWorld* WorldContext = CallingActor->GetWorld();	
 
 		// The size of the drawn plane
 		const auto PlaneExtents = FVector(

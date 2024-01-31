@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "DrawDebugHelpers.h"
+#include "Subsystems/IntersectablesSubsystem.h"
 
 
 //////////////////////////////////////////////////////////////////////////
