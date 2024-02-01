@@ -109,5 +109,68 @@ public:
 
 		return true;
 	}
+	UFUNCTION(BlueprintCallable, Category = "Intersection")
+	static bool SphereSphere(
+		const FVector CenterA,
+		const float RadiusA,
+		const FVector CenterB,
+		const float RadiusB,
+		FVector& ContactPoint)
+	{
+		const auto Diff = CenterA - CenterB;
+		const auto RadiusSum = RadiusA + RadiusB;
+
+		const auto bIntersects = Diff.Dot(Diff) <= RadiusSum * RadiusSum;
+
+		if(bIntersects)
+		{
+			const auto Direction = CenterB - CenterA;
+			RaySphere(CenterA, Direction.GetSafeNormal(), CenterB, RadiusB, ContactPoint);
+		}
+
+		return bIntersects;
+	}
+
+	// Sphere-Plane Intersection
+	UFUNCTION(BlueprintCallable, Category = "Intersection")
+	static bool SpherePlane(
+		const FVector Center,
+		const float Radius,
+		const FVector PlaneCenter,
+		const FVector PlaneNormal,
+		FVector& ContactPoint)
+	{
+		const auto Distance = Center.Dot(PlaneNormal) - PlaneNormal.Dot(PlaneCenter);
+		const auto bIntersects = FMath::Abs(Distance) <= Radius;
+
+		if(bIntersects)
+		{
+			RayPlane(Center, -PlaneNormal, PlaneNormal, PlaneCenter, ContactPoint);
+		}
+		
+		return bIntersects;
+	}
+	UFUNCTION(BlueprintCallable, Category = "Intersection")
+	static bool RayPlane(
+		const FVector Origin,
+		const FVector Direction,
+		const FVector PlaneNormal,
+		const FVector PlaneOrigin,
+		FVector& ContactPoint)
+	{
+		const auto CoordDot = PlaneNormal.Dot(PlaneOrigin);
+		const auto DirectionDot = PlaneNormal.Dot(Direction);
+
+		// Skip if plane normal and ray share direction.
+		if(DirectionDot >= 0)
+		{
+			return false;
+		}
+
+		const auto T = (CoordDot - PlaneNormal.Dot(Origin)) / DirectionDot;
+		ContactPoint = Origin + Direction.GetSafeNormal() * T;
+		
+		return true;
+	}
 
 };

@@ -27,7 +27,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
+	UFUNCTION(BlueprintNativeEvent)
+
+	void Unlock();
+	UFUNCTION(BlueprintNativeEvent)
+	void Lock();
 	// Called every frame
 	virtual void Demonstrate() override;
 
@@ -35,6 +40,8 @@ public:
 	int32 RelativeContext;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = TestBitflag, meta = (Bitmask, BitmaskEnum = "ERelativeContext"))
 	int32 ContextKey;
+	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = TestBitflag, meta = (Bitmask, BitmaskEnum = "ERelativeContext"))
+	bool bShouldUnlock;
 	UFUNCTION(BlueprintNativeEvent)
     void CalculateRelativeContext();
 };

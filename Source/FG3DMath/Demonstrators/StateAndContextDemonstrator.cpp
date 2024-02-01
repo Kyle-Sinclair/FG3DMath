@@ -24,9 +24,19 @@ void AStateAndContextDemonstrator::BeginPlay()
 	Super::BeginPlay();
 	GetWorld()->GetSubsystem<UStateAndContextSubsystem>()->RegisterDemonstrator(this);
 	CharacterReference =  UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	int BitKey = FMath::RandRange(1, 6);
+	if(ContextKey == 0)
+	{
+		ContextKey = FMath::RandRange(1, 6);
+	}
 
-	ContextKey = 1 << BitKey;
+
+}
+
+void AStateAndContextDemonstrator::Unlock_Implementation()
+{
+}
+void AStateAndContextDemonstrator::Lock_Implementation()
+{
 }
 
 void AStateAndContextDemonstrator::Demonstrate()
@@ -36,5 +46,16 @@ void AStateAndContextDemonstrator::Demonstrate()
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Demonstrator reporting for duty"));
 	}
 	CalculateRelativeContext();
+	bShouldUnlock = (ContextKey & RelativeContext) == ContextKey;
+	if(bShouldUnlock)
+	{
+		Unlock();
+	}
+	else
+	{
+		Lock();
+	}
+
+	
 
 }
