@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "MotionWarpingComponent.h"
+#include "NoisyBullet.h"
 #include "Templates/Tuple.h"
 
 #include "FG3DMathCharacter.generated.h"
@@ -28,6 +29,8 @@ class AFG3DMathCharacter : public ACharacter
 	class UMotionWarpingComponent* MotionWarpingComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	class TSubclassOf<ABullets> BulletPrefab;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	class TSubclassOf<ANoisyBullet> NoisyBulletPrefab;
 
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -77,6 +80,8 @@ protected:
 	void Look(const FInputActionValue& Value);
 	UFUNCTION(BlueprintCallable)
 	void Shoot();
+	UFUNCTION(BlueprintCallable)
+	void ShootNoisy();
 			
 
 protected:

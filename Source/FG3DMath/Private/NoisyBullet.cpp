@@ -25,10 +25,11 @@ void ANoisyBullet::SampleNoise()
 {
 	FVector SamplePoint = GetActorLocation();
 	SamplePoint.X = Remap(0,1000,0,1,SamplePoint.X);
-	SamplePoint.Y = Remap(0,1000,0,1,SamplePoint.X);
-	SamplePoint.Z = Remap(0,1000,0,1,SamplePoint.X);
-	const float noiseValue = FMath::PerlinNoise3D(FVector(SamplePoint.X,SamplePoint.Y,SamplePoint.Z));
-	Speed = FMath::Lerp(MinSpeed,MaxSpeed,noiseValue);	
+	SamplePoint.Y = Remap(0,1000,0,1,SamplePoint.Y);
+	SamplePoint.Z = Remap(0,1000,0,1,SamplePoint.Z);
+	SampleRange = SamplePoint;
+	const FVector noiseValue =  FVector(FMath::PerlinNoise1D(SamplePoint.X),FMath::PerlinNoise1D(SamplePoint.Y),FMath::PerlinNoise1D(SamplePoint.Z));
+	Direction = noiseValue;
 }
 
 // Called every frame
@@ -41,9 +42,12 @@ void ANoisyBullet::Tick(float DeltaTime)
 
 void ANoisyBullet::ConfigureOnSpawn(const FVector NewDirection)
 {
+	Direction = NewDirection;
+
 }
-float  ANoisyBullet::Remap(const float Min, const float Max, const float newMin, const float newMax, const float interval)
+float  ANoisyBullet::Remap(float start1, float stop1,float start2, float stop2,float value)
 {
-	return ( interval - Min ) / ( Max - Min ) * (newMax - newMin) + newMin;
+	float outgoing = start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+	return outgoing;
 }
 

@@ -138,6 +138,14 @@ void AFG3DMathCharacter::Shoot()
 	NewBullet->ConfigureOnSpawn(GetActorForwardVector());
 }
 
+void AFG3DMathCharacter::ShootNoisy()
+{
+	FVector SpawnLocation = GetActorLocation() + GetActorForwardVector() * 50;
+	FActorSpawnParameters SpawnParameters;
+	ANoisyBullet* NewBullet = GetWorld()->SpawnActor<ANoisyBullet>(NoisyBulletPrefab,SpawnLocation,GetActorRotation(),SpawnParameters);
+	NewBullet->ConfigureOnSpawn(GetActorForwardVector());
+}
+
 
 void AFG3DMathCharacter::ToggleVaulting(bool In_bShouldVault)
 {
