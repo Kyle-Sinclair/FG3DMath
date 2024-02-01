@@ -57,10 +57,8 @@ void AIntersectionDemonstrator::Demonstrate()
 	case EIntersectionType::Triangle:
 		UShapeDrawUtility::Triangle(WorldContext, GetActorTransform(), V0, V1, V2,  bIsIntersecting ? FColor::Red : FColor::Blue);
 		break;
-
-	case EIntersectionType::Ray:
-		UShapeDrawUtility::Ray(WorldContext, GetActorLocation(), GetActorForwardVector(),  bIsIntersecting ? FColor::Red : FColor::Blue);
-		break;		
+	default:
+		break;
 	}
 }
 

@@ -27,6 +27,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Sphere")
 	float Radius;
 
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="AABB", meta = (MakeEditWidget = true))
+	FVector ContactPoint;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="AABB", meta = (MakeEditWidget = true))
 	FVector Min;
 

@@ -33,6 +33,8 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = TestBitflag, meta = (Bitmask, BitmaskEnum = "ERelativeContext"))
 	int32 RelativeContext;
+	UPROPERTY(EditAnywhere,BlueprintReadOnly, Category = TestBitflag, meta = (Bitmask, BitmaskEnum = "ERelativeContext"))
+	int32 ContextKey;
 	UFUNCTION(BlueprintNativeEvent)
     void CalculateRelativeContext();
 };

@@ -22,7 +22,6 @@ void UIntersectablesSubsystem::CalculateIntersection(AIntersectionDemonstrator* 
 
 void UIntersectablesSubsystem::ProcessDemonstrator(AIntersectionDemonstrator* DemonstratorA)
 {
-	//CalculateIntersection(DemonstratorA,)
 	bool bIsIntersecting = false;
 	if(PlayerCam != nullptr)
 	{

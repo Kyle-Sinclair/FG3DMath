@@ -24,6 +24,9 @@ void AStateAndContextDemonstrator::BeginPlay()
 	Super::BeginPlay();
 	GetWorld()->GetSubsystem<UStateAndContextSubsystem>()->RegisterDemonstrator(this);
 	CharacterReference =  UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	int BitKey = FMath::RandRange(1, 6);
+
+	ContextKey = 1 << BitKey;
 }
 
 void AStateAndContextDemonstrator::Demonstrate()
