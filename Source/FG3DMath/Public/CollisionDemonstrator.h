@@ -35,7 +35,8 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float MoveSpeed;
-	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float Elasticity;
 
 	ACollisionDemonstrator();
 	void BeginPlay();

@@ -58,7 +58,7 @@ void UCollisionsSubsystem::Tick(float DeltaTime)
 						DemonstratorB->GetRadius(),
 						ContactPoint))
 					{
-						DemonstratorA->AddForce(-DemonstratorA->Velocity * 2.f);
+						DemonstratorA->AddForce(-DemonstratorA->Velocity * DemonstratorA->Elasticity);
 						DrawDebugPoint(GetWorld(), ContactPoint, 25.f, FColor::Purple, false, 1.5f);
 					}									
 				}
@@ -72,7 +72,7 @@ void UCollisionsSubsystem::Tick(float DeltaTime)
 						DemonstratorB->GetActorUpVector(),
 						ContactPoint))
 					{
-						DemonstratorA->AddForce(-DemonstratorA->Velocity * 2.f);
+						DemonstratorA->AddForce(-DemonstratorA->Velocity * DemonstratorA->Elasticity);
 						DrawDebugPoint(GetWorld(), ContactPoint, 25.f, FColor::Purple, false, 1.5f);
 					}
 				}
